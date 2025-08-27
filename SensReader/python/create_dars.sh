@@ -185,7 +185,8 @@ process_scene() {
         else
         echo "Getting .sens file..."
             #$PROJECT_DIR/data/scripts/get_sqa3d.sh "$scene_name"
-            /project/def-wangcs/indrisch/vllm_experiments/data/scripts/get_sqa3d.sh "$scene_name"
+            GET_SQA3D=$(find $PROJECT_DIR -name "get_sqa3d.sh")
+            $GET_SQA3D "$scene_name"
         fi
     fi
     
