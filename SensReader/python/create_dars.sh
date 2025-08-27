@@ -55,6 +55,15 @@ if [ $# -eq 0 ]; then
     usage
 fi
 
+if [[ "$PWD" == *vllm_experiments* ]]; then
+    PROJECT_DIR="${PWD%%vllm_experiments*}/vllm_experiments"
+elif [[ "$PWD" == *vllm* ]]; then
+    PROJECT_DIR="${PWD%%vllm*}/vllm"
+else
+    echo "Error: Could not find 'vllm' or 'vllm_experiments' in the current path."
+    exit 1
+fi
+
 # The first argument is the scene list file
 scene_list_file="$1"
 shift
@@ -122,8 +131,8 @@ if [ ! -f "$scene_list_file" ] && [ ! -r "$scene_list_file" ]; then
 fi
 
 # Base paths
-BASE_SCAN_PATH="/project/def-wangcs/indrisch/vllm/data/ScanNet/scans"
-BASE_OUTPUT_PATH="/project/def-wangcs/indrisch/vllm/data/ScanNet/scans"
+BASE_SCAN_PATH="$PROJECT_DIR/data/ScanNet/scans"
+BASE_OUTPUT_PATH="$PROJECT_DIR/data/ScanNet/scans"
 
 
 echo "Processing scenes from: $scene_list_file"
@@ -175,7 +184,8 @@ process_scene() {
             echo "Warning: .sens file already exists: $SCAN_FILE"
         else
         echo "Getting .sens file..."
-            /project/def-wangcs/indrisch/vllm/data/scripts/get_sqa3d.sh "$scene_name"
+            #$PROJECT_DIR/data/scripts/get_sqa3d.sh "$scene_name"
+            /project/def-wangcs/indrisch/vllm_experiments/data/scripts/get_sqa3d.sh "$scene_name"
         fi
     fi
     
@@ -189,7 +199,7 @@ process_scene() {
         # Extract data using the Python reader
         echo "Converting .sens to folders..."
         source temp_dars_env/bin/activate
-        python /project/def-wangcs/indrisch/vllm/data_support/ScanNet/SensReader/python/reader.py \
+        python $PROJECT_DIR/data_support/ScanNet/SensReader/python/reader.py \
             --filename "$SCAN_FILE" \
             --output_path "$OUTPUT_DIR" \
             ${filetype_options}
