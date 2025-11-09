@@ -1,0 +1,4 @@
+Load the modules and then install (run within your repo): module load git-lfs/3.4.0 StdEnv/2023 && git-lfs install
+Find and track any large files that you have in your repo: find . -type f -size +50M ! -name *.dar ! -name *.whl ! -name *.pack -exec sh -c "module load git-lfs/3.4.0 StdEnv/2023 && git-lfs track {} && echo {}" sh {} \;
+The previous command will add the files to .gitattributes, so add that file as you would any other file: git add .gitattributes; this is a reference to the large files that will be sent separately to LFS but referenced as with any other file.
+ Then, git add, commit, push as normal.

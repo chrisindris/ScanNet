@@ -1,0 +1,41 @@
+Usage: /var/spool/slurm/slurmd/job461582/slurm_script <cluster_name> <experiment> [sub-experiment-1] [sub-experiment-2]
+
+scontrol show job 461582
+JobId=461582 JobName=openmp_job
+   UserId=indrisch(3122343) GroupId=indrisch(3122343) MCS_label=N/A
+   Priority=1649528 Nice=0 Account=def-wangcs QOS=normal
+   JobState=COMPLETING Reason=NonZeroExitCode Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=1:0
+   RunTime=00:00:03 TimeLimit=00:15:00 TimeMin=N/A
+   SubmitTime=2025-11-08T23:59:51 EligibleTime=2025-11-08T23:59:51
+   AccrueTime=2025-11-08T23:59:51
+   StartTime=2025-11-08T23:59:51 EndTime=2025-11-08T23:59:54 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2025-11-08T23:59:51 Scheduler=Main
+   Partition=compute AllocNode:Sid=tri-login06:2159082
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=tri0918
+   BatchHost=tri0918
+   NumNodes=1 NumCPUs=192 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=8,mem=767000M,node=1,billing=8
+   AllocTRES=cpu=192,mem=767000M,node=1,billing=192
+   Socks/Node=* NtasksPerN:B:S:C=1:0:*:* CoreSpec=*
+   MinCPUsNode=8 MinMemoryNode=767000M MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=NO Contiguous=0 Licenses=(null) Network=(null)
+   Command=/scratch/indrisch/vllm_experiments/data_support/ScanNet/SensReader/python/create_dict_of_file_paths.sh
+   WorkDir=/scratch/indrisch/vllm_experiments/data_support/ScanNet/SensReader/python
+   Comment=/opt/slurm/bin/sbatch --export=NONE --get-user-env=L create_dict_of_file_paths.sh 
+   StdErr=/scratch/indrisch/vllm_experiments/data_support/ScanNet/SensReader/python/%N-create_dict_of_file_paths-multi-461582.out
+   StdIn=/dev/null
+   StdOut=/scratch/indrisch/vllm_experiments/data_support/ScanNet/SensReader/python/%N-create_dict_of_file_paths-multi-461582.out
+   TresPerTask=cpu=8
+   MailUser=indrisch@scinet.local MailType=FAIL
+   
+
+sacct -j 461582
+JobID           JobName    Account    Elapsed  MaxVMSize     MaxRSS  SystemCPU    UserCPU ExitCode 
+------------ ---------- ---------- ---------- ---------- ---------- ---------- ---------- -------- 
+461582       openmp_job def-wangcs   00:00:03                         00:00:00   00:00:00      0:0 
+461582.batch      batch def-wangcs   00:00:03                         00:00:00   00:00:00      0:0 
+461582.exte+     extern def-wangcs   00:00:03                         00:00:00   00:00:00      0:0 
+

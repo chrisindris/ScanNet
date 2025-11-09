@@ -142,7 +142,9 @@ echo "------------------------"
 if $sens_to_folders; then
     echo "This script will call ./reader.py; it will call (or create, if needed) a temporary venv."
     if [ ! -d "temp_dars_env" ]; then
-        module load python/3.12 opencv/4.11
+        #module load python/3.12 opencv/4.11
+        module load StdEnv/2023 gcc/12.3 openmpi/4.1.5
+        module load python/3.12 opencv/4.11 cuda/12.6
         virtualenv --no-download temp_dars_env && source temp_dars_env/bin/activate
         pip install --no-index --upgrade pip
         pip install --no-index numpy imageio pypng

@@ -1,0 +1,58 @@
+PYTHONPATH: /cvmfs/soft.computecanada.ca/custom/python/site-packages:/scratch/indrisch//vllm_experiments/kimi_vl_a3b_thinking_2506/kimivl_3d_test
+args:  Namespace(cluster_name='TRILLIUM', question_file='/scratch/indrisch//vllm_experiments/data/sqa-3d/ScanQA_format/SQA_650_formatted_LLaVa3d_annotations.json', answer_file='/scratch/indrisch//vllm_experiments/data/sqa-3d/ScanQA_format/SQA_650_formatted_LLaVa3d_answers.json', image_folder='/scratch/indrisch/scans', export_json='/project/def-wangcs/indrisch/vllm/data_support/ScanNet/SensReader/python/SQA3D_dataset_details_noslurm_trillium_1of1.json', traces_json='/scratch/indrisch//vllm_experiments/kimi_vl_a3b_thinking_2506/kimivl_3d_test/experiments/SQA3D/650/SQA_650_formatted_LLaVa3d_pred-answers.json', overwrite_existing_json=False, model_path='Qwen/Qwen3-4B-Thinking-2507', device='cpu', sample_rate=15, num_chunks=1, chunk_idx=0, mc_traces=4, batch_size=-1, sort_by_scene=False, tensor_parallel_size=1)
+Cluster name:  TRILLIUM
+['/scratch/indrisch/vllm_experiments/kimi_vl_a3b_thinking_2506/kimivl_3d_test', '/scratch/indrisch/vllm_experiments/data_support/ScanNet/SensReader/python', '/cvmfs/soft.computecanada.ca/custom/python/site-packages', '/scratch/indrisch/vllm_experiments/kimi_vl_a3b_thinking_2506/kimivl_3d_test', '/cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/python/3.12.4/lib/python312.zip', '/cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/python/3.12.4/lib/python3.12', '/cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/python/3.12.4/lib/python3.12/lib-dynload', '/scratch/indrisch/env/lib/python3.12/site-packages']
+HF_HOME:  /scratch/indrisch/huggingface/hub
+HF_HUB_CACHE:  /scratch/indrisch/huggingface/hub
+HF_HUB_DISABLE_XET:  1
+getting current chunk of scenes...
+Traceback (most recent call last):
+  File "/scratch/indrisch/vllm_experiments/data_support/ScanNet/SensReader/python/create_dict_of_file_paths.py", line 379, in <module>
+    _worker_run(args.chunk_idx, args, [])
+  File "/scratch/indrisch/vllm_experiments/data_support/ScanNet/SensReader/python/create_dict_of_file_paths.py", line 218, in _worker_run
+    outputs = main(
+              ^^^^^
+  File "/scratch/indrisch/vllm_experiments/data_support/ScanNet/SensReader/python/create_dict_of_file_paths.py", line 260, in main
+    with open("/project/def-wangcs/indrisch/vllm/data/sqa-3d/ScanQA_format/the_650_scenes.txt", "r") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/project/def-wangcs/indrisch/vllm/data/sqa-3d/ScanQA_format/the_650_scenes.txt'
+
+scontrol show job 461585
+JobId=461585 JobName=openmp_job
+   UserId=indrisch(3122343) GroupId=indrisch(3122343) MCS_label=N/A
+   Priority=1648408 Nice=0 Account=def-wangcs QOS=normal
+   JobState=COMPLETING Reason=NonZeroExitCode Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=1:0
+   RunTime=00:00:06 TimeLimit=00:15:00 TimeMin=N/A
+   SubmitTime=2025-11-09T00:00:31 EligibleTime=2025-11-09T00:00:31
+   AccrueTime=2025-11-09T00:00:31
+   StartTime=2025-11-09T00:01:32 EndTime=2025-11-09T00:01:38 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2025-11-09T00:01:32 Scheduler=Backfill
+   Partition=compute AllocNode:Sid=tri-login06:2159082
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=tri0031
+   BatchHost=tri0031
+   NumNodes=1 NumCPUs=192 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=8,mem=767000M,node=1,billing=8
+   AllocTRES=cpu=192,mem=767000M,node=1,billing=192
+   Socks/Node=* NtasksPerN:B:S:C=1:0:*:* CoreSpec=*
+   MinCPUsNode=8 MinMemoryNode=767000M MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=NO Contiguous=0 Licenses=(null) Network=(null)
+   Command=/scratch/indrisch/vllm_experiments/data_support/ScanNet/SensReader/python/create_dict_of_file_paths.sh
+   WorkDir=/scratch/indrisch/vllm_experiments/data_support/ScanNet/SensReader/python
+   Comment=/opt/slurm/bin/sbatch --export=NONE --get-user-env=L create_dict_of_file_paths.sh TRILLIUM 1 1 1 
+   StdErr=/scratch/indrisch/vllm_experiments/data_support/ScanNet/SensReader/python/%N-create_dict_of_file_paths-multi-461585.out
+   StdIn=/dev/null
+   StdOut=/scratch/indrisch/vllm_experiments/data_support/ScanNet/SensReader/python/%N-create_dict_of_file_paths-multi-461585.out
+   TresPerTask=cpu=8
+   MailUser=indrisch@scinet.local MailType=FAIL
+   
+
+sacct -j 461585
+JobID           JobName    Account    Elapsed  MaxVMSize     MaxRSS  SystemCPU    UserCPU ExitCode 
+------------ ---------- ---------- ---------- ---------- ---------- ---------- ---------- -------- 
+461585       openmp_job def-wangcs   00:00:06                         00:00:00   00:00:00      0:0 
+461585.batch      batch def-wangcs   00:00:06                         00:00:00   00:00:00      0:0 
+461585.exte+     extern def-wangcs   00:00:06                         00:00:00   00:00:00      0:0 
+
