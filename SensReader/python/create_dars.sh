@@ -244,6 +244,9 @@ process_scene() {
                 --export_intrinsics) dar -R . -O -wa -x intrinsic -v -g intrinsic ;;
             esac
         done
+        # Delete images where X.jpg and X is not divisible by 8
+        echo "Deleting images not divisible by 8..."
+        find . -type f -name "*.jpg" -exec bash -c 'basename=$(basename "$1" .jpg); if [[ "$basename" =~ ^[0-9]+$ ]] && [ $((basename % 8)) -ne 0 ]; then rm "$1"; fi' _ {} \;
     fi
     
     if [ "$delete_folders" = true ]; then
